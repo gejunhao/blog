@@ -1,0 +1,32 @@
+html{
+  font-size: 100px;
+}
+body {
+  
+  margin: 0;
+  padding: 0;
+  background: url('../assets/bg.jpg') no-repeat;
+  background-size: 100% 100%;
+}
+#app-main{
+  font-size: 0.14rem;
+  header {
+    height: 0.60rem;
+    margin: 0;
+    padding: 0 0.2rem;
+    background-color: #fff;
+    box-shadow: 5px 0 5px #ccc;
+    position: fixed;
+    top: -0.60rem;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    transition: all 1s ease-in-out;
+  }
+  #app-body{
+    // margin-top: 3.2rem;
+    footer{
+      height: 0.6rem;
+    }
+  }
+}
