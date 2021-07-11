@@ -8,9 +8,15 @@ const routes = [
     redirect: '/home',
   },
   {
+    path:'/login',
+    name:'login',
+    component:()=>import('@/views/login/index.vue')
+  },
+  {
     path: '/404',
     component: () => import('@/views/404'),
   },
+
   {
     name: 'home',
     path: '/home',

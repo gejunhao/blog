@@ -1,19 +1,29 @@
 <template>
   <header>
     <div class="logo">
-      <img
-        src="../../../public/logo.png"
-        alt=""
-      >
+      <img src="../../../public/logo.png" alt="" />
       <span>一起学前端</span>
     </div>
-    <div class="user_author">
-      <div class="no-logind">
-        <button>登录</button>
-        <button>注册</button>
+    <div class="user_avatar">
+      <div class="logind" v-if="token">
+        <Dropdown
+          style="margin-left: 0.2rem"
+          placement="bottom-end"
+          trigger="click"
+        >
+          <Avatar :style="{ background: color }"><span style="cursor: pointer;">{{ username }}</span></Avatar>
+          <DropdownMenu slot="list">
+            <DropdownItem>我的主页</DropdownItem>
+            <DropdownItem>炸酱面</DropdownItem>
+            <DropdownItem>豆汁儿</DropdownItem>
+            <DropdownItem>设置</DropdownItem>
+            <DropdownItem>退出登录</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div>
-      <div class="logind">
-
+      <div class="no-login" v-else>
+        <Button style="marginRight: 0.05rem" @click="tologin">登录</Button>
+        <Button @click="toregister">注册</Button>
       </div>
     </div>
   </header>
@@ -21,32 +31,54 @@
 
 <script>
 export default {
-  name: 'Appheader',
+  name: "Appheader",
   data() {
-    return {}
+    return {
+      username: "admin",
+      bgcolor: ["#f56a00", "#7265e6", "#ffbf00", "#00a2ae"],
+      token: "",
+    };
+  },
+  computed: {
+    color() {
+      const col = this.bgcolor[this.random(4)];
+      return col;
+    },
   },
   mounted() {
-    window.addEventListener('scroll', this.autofix)
+    window.addEventListener("scroll", this.autofix);
   },
   destroyed() {
-    window.removeEventListener('scroll', this.resetFixed)
+    window.removeEventListener("scroll", this.autofix);
   },
   methods: {
     autofix() {
-      const scrollTop = document.documentElement.scrollTop
-      const tag = document.querySelector('#app-main>header')
+      const scrollTop = document.documentElement.scrollTop;
+      const tag = document.querySelector("#app-main>header");
       if (scrollTop >= 50) {
-        tag.style.top = 0
+        tag.style.top = 0;
       } else {
-        tag.style.top = -0.6 + 'rem'
+        tag.style.top = -0.6 + "rem";
       }
     },
     resetFixed() {
-      const tag = document.querySelector('#app-main>header')
-      tag.style.top = -0.6 + 'rem'
+      const tag = document.querySelector("#app-main>header");
+      tag.style.top = -0.6 + "rem";
+    },
+    //随机背景色 range 范围 type Number
+
+    random(range) {
+      const index = Math.floor(Math.random() * range);
+      return index;
+    },
+    tologin(){
+      this.$router.push({path:'/login',query:{type:'login'}})
+    },
+    toregister(){
+      this.$router.push({path:'/login',query:{type:'register'}})
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -68,6 +100,7 @@ header {
     height: 0.6rem;
     vertical-align: top;
     line-height: 0.6rem;
+
   }
 }
 </style>

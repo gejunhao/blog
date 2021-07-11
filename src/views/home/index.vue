@@ -16,6 +16,6 @@ export default {
   max-width: 12rem;
   margin: 0 auto;
   height: 100vh;
-  background-color: aqua;
+  // background-color: aqua;
 }
 </style>
