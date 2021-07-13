@@ -4,30 +4,45 @@
       <li>
         <h3>联系我</h3>
         <p>邮箱:1208851253@qq.com</p>
-          <p>Q Q :1208851253</p>
-        
+        <p>Q Q :1208851253</p>
+
       </li>
       <li>
         <h3>打赏</h3>
-        <img src="../../assets/zfb.png" alt="" />
+        <img
+          src="../../assets/zfb.png"
+          alt=""
+        />
       </li>
       <li>
         <h3>QQ交流群</h3>
-        <img src="../../assets/qq.png" alt="" />
+        <img
+          src="../../assets/qq.png"
+          alt=""
+        />
       </li>
     </ul>
     <hr />
     <div class="beian">
-      <img src="../../../public/beianIcon.png" alt="" />
-      <span>豫备网@123456789</span>
+      <a
+        href="https://beian.miit.gov.cn"
+        target="_blank"
+      >
+        <img
+          src="../../../public/beianIcon.png"
+          alt=""
+        />
+        <span>备案号:豫ICP备2021020004号-1</span>
+      </a>
+
     </div>
   </footer>
 </template>
 
 <script>
 export default {
-  name: "Appfooter",
-};
+  name: 'Appfooter'
+}
 </script>
 
 <style lang="scss" scoped>
@@ -60,15 +75,16 @@ ul {
     //   height: 0.6rem;
     //   border-right: 1px solid rgba(255, 255, 255, 0.9);
     // }
-    h3,p {
+    h3,
+    p {
       text-align: center;
-       margin:0.1rem 0;
+      margin: 0.1rem 0;
     }
-    img{
+    img {
       width: 1rem;
       height: 1rem;
       display: block;
-      margin:0.1rem auto;
+      margin: 0.1rem auto;
     }
   }
 }
@@ -77,11 +93,22 @@ ul {
   height: 0.4rem;
   line-height: 0.4rem;
   text-align: center;
-  vertical-align: middle;
-  img {
-    display: inline-block;
-    width: 0.14rem;
-    height: 0.14rem;
+
+  a {
+    img {
+      display: inline-block;
+      width: 0.14rem;
+      height: 0.14rem;
+      vertical-align: middle;
+      margin-right: 0.1rem;
+    }
+    span {
+      vertical-align: middle;
+      color: #ccc;
+    }
+    span:hover {
+      color: #2d8cf0;
+    }
   }
 }
 </style>
