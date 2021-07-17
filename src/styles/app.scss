@@ -72,15 +72,17 @@
 html{
   font-size: 100px;
 }
-body {
-  
-  margin: 0;
-  padding: 0;
+body{
+  font-family:"微软雅黑";font-size: 1rem;
   background: url('../assets/bg.jpg') no-repeat;
   background-size: 100% 100%;
+  margin: 0;
+  padding: 0;
 }
+
 #app-main{
   font-size: 0.14rem;
+  
   header {
     height: 0.60rem;
     margin: 0;

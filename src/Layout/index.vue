@@ -27,8 +27,6 @@ export default {
 .app-mian {
   max-width: 1400px;
   min-width: 600px;
-  height: auto;
-  min-height: 100vh;
   background-color: red;
 }
 </style>

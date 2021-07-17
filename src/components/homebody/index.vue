@@ -63,13 +63,12 @@ export default {
 
 <style scoped lang="scss">
 .home-body {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  // max-width: 14rem;
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+  min-height: 100vh;
   margin: 0 auto;
-  z-index: 4;
   color: #fff;
   img {
     width: 1.5rem;
