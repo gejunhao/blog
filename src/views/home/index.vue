@@ -25,7 +25,6 @@ export default {
 
 .home-theme {
   width: 100%;
-  background: url('../../assets/homebanner.jpg') no-repeat center center;
   position: relative;
   &::after {
     content: '';
