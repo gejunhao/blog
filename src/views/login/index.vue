@@ -50,7 +50,7 @@
                 <Button
                   type="primary"
                   @click="handleSubmit('formlogin')"
-                >Signin</Button>
+                >Sign</Button>
                 <Button
                   @click="handleReset('formlogin')"
                   style="margin-left: 8px"
@@ -118,14 +118,14 @@
                 </Row>
               </FormItem>
               <FormItem
-                prop="account"
+                prop="phone"
                 label="手机号"
               >
                 <Row>
                   <Col :span="20">
                   <Input
                     type="text"
-                    v-model="formRegister.account"
+                    v-model="formRegister.phone"
                     placeholder="请输入手机号"
                   >
                   </Input></Col>
@@ -163,7 +163,7 @@
                 <Button
                   type="primary"
                   @click="handleSubmit('formRegister')"
-                >Signin</Button>
+                >Sign</Button>
                 <Button
                   @click="handleReset('formRegister')"
                   style="margin-left: 8px"
@@ -185,7 +185,8 @@
 </template>
 
 <script>
-import { login } from '@/api/login'
+import { login, register } from '@/api/login'
+
 export default {
   data() {
     const validateAge = (rule, value, callback) => {
@@ -246,7 +247,8 @@ export default {
         account: '',
         email: '',
         password: '',
-        checkpassword: ''
+        checkpassword: '',
+        phone: ''
       },
       rules: {
         username: [
@@ -257,12 +259,25 @@ export default {
           },
           {
             type: 'string',
-            max: 6,
-            message: '不能超过6个字符',
+            max: 12,
+            message: '不能超过12个字符',
             trigger: 'blur'
           }
         ],
         account: [
+          {
+            required: true,
+            message: '请输入账号',
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            max: 12,
+            message: '不能超过12个字符',
+            trigger: 'blur'
+          }
+        ],
+        phone: [
           {
             required: true,
             message: '请输入手机号',
@@ -293,6 +308,7 @@ export default {
   },
   mounted() {
     this.init()
+    console.log(this.$store)
   },
   methods: {
     tabsClick(name) {
@@ -301,9 +317,28 @@ export default {
       this.$forceUpdate()
     },
     handleSubmit(name) {
-      this.$refs[name].validate((valid) => {
+      const params = {
+        ...this[name]
+      }
+      this.$refs[name].validate(async (valid) => {
         if (valid) {
-          this.$Message.success('Success!')
+          if (name === 'formlogin') {
+            login(params).then((res) => {
+              if (res.code === 1) {
+                this.$Message.success(res.msg)
+                const data = JSON.stringify(res.data)
+                localStorage.setItem('userInfo', data)
+                this.$store.dispatch('user/SET_USERINFO', res.data)
+                this.$router.push('/home/index')
+              } else {
+                this.$Message.warning(res.msg)
+              }
+            })
+          } else if (name === 'formRegister') {
+            register(params).then((res) => {
+              console.log(res)
+            })
+          }
         } else {
           this.$Message.error('Fail!')
         }
@@ -312,13 +347,12 @@ export default {
     handleReset(name) {
       this.$refs[name].resetFields()
     },
-    async init() {
+    init() {
       if (this.$route.query.type) {
         this.activeTabs = this.$route.query.type
       }
-      const res = await login({ obj: 1, obj2: 2 })
-      console.log(res)
-    }
+    },
+    submit() {}
   }
 }
 </script>

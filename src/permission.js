@@ -9,6 +9,6 @@
 import router from './router'
 router.beforeEach((to, form, next) => {
   console.log(to, form)
-  alert('正在登录')
+  // alert('正在登录')
   next()
 })

@@ -1,24 +1,30 @@
 const baseUrl = 'http://localhost:3000'
 const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new XMLHttpRequest('Microsoft.XMLHTTP')
 const _axios = (obj) => {
-  const { url, method, data, ContentType = 'application/json;charset=UTF-8' } = obj
-  var methods = method.toUpperCase()
-  if (methods === 'GET') {
-    const params = formatParams(data)
-    xhr.open('GET', baseUrl + url + '?' + params, true)
-    xhr.send(null)
-  } else if (methods === 'POST') {
-    xhr.open('POST', baseUrl + url, true)
-    xhr.setRequestHeader('Content-type', ContentType)
-    xhr.send(data)
-  }
-  xhr.onreadystatechange = function() {
-    if (xhr.readuState == 4 && xhr.status === 200) {
-      console.log(xhr.responseText)
+  return new Promise((resolve, reject) => {
+    const { url, method, data, ContentType = 'application/json;charset=UTF-8' } = obj
+    var methods = method.toUpperCase()
+    if (methods === 'GET') {
+      const params = formatParams(data)
+      xhr.open('GET', baseUrl + url + '?' + params, true)
+
+      xhr.send(null)
+    } else if (methods === 'POST') {
+      xhr.open('POST', baseUrl + url, true)
+      xhr.setRequestHeader('Content-type', ContentType)
+      xhr.send(data)
     }
-  }
+    xhr.onreadystatechange = function() {
+      // console.log(xhr, '11111')
+      if (xhr.readyState == 4 && xhr.status === 200) {
+        // console.log(xhr.responseText, '11111')
+        resolve(JSON.parse(xhr.responseText))
+        reject()
+      }
+    }
+  })
 }
-function formatParams(obj) {
+function formatParams(obj = {}) {
   const params = Object.keys(obj) || []
   var arr = []
   if (params.length) {
@@ -30,4 +36,5 @@ function formatParams(obj) {
   }
   return ''
 }
+
 export default _axios

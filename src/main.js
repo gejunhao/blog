@@ -3,6 +3,7 @@ import router from './router'
 import App from './App'
 import scss from 'scss'
 import iView from 'iview'
+import store from './store'
 import 'iview/dist/styles/iview.css'
 import '@/styles/app.scss'
 import '@/permission' // permission control
@@ -14,4 +15,5 @@ Vue.config.productionTip = false
 new Vue({
   render: (h) => h(App),
   router,
+  store,
 }).$mount('#app')
