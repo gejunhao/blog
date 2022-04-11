@@ -15,6 +15,7 @@ const mutations = {
   RESET: (state) => {
     state.userInfo = {}
     state.authToken = ''
+    localStorage.removeItem('authToken')
     Cookies.remove('authToken')
   },
 }
@@ -35,7 +36,7 @@ const actions = {
         if (res.code === 1) {
           commit('USERINFO', res.data)
           commit('AUTHTOKEN', res.token)
-          console.log(res, 'res')
+          localStorage.setItem('authToken', JSON.stringify(res.token))
           resolve(res.data)
         } else {
           commit('RESET')
