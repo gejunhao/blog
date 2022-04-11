@@ -50,11 +50,11 @@
                 <Button
                   type="primary"
                   @click="handleSubmit('formlogin')"
-                >Sign</Button>
+                >登录</Button>
                 <Button
                   @click="handleReset('formlogin')"
                   style="margin-left: 8px"
-                >Reset</Button>
+                >重置</Button>
               </FormItem>
             </Form>
           </div>
@@ -163,11 +163,11 @@
                 <Button
                   type="primary"
                   @click="handleSubmit('formRegister')"
-                >Sign</Button>
+                >登录</Button>
                 <Button
                   @click="handleReset('formRegister')"
                   style="margin-left: 8px"
-                >Reset</Button>
+                >重置</Button>
               </FormItem>
             </Form>
             <div class="esec">
@@ -327,7 +327,11 @@ export default {
               if (res.code === 1) {
                 this.$Message.success(res.msg)
                 const data = JSON.stringify(res.data)
+                const token = res.token
+                console.log(token)
+                localStorage.setItem('authToken', token)
                 localStorage.setItem('userInfo', data)
+                this.$store.dispatch('user/SET_AUTHTOKEN', token)
                 this.$store.dispatch('user/SET_USERINFO', res.data)
                 this.$router.push('/home/index')
               } else {

@@ -16,14 +16,15 @@
           style="margin-left: 0.2rem"
           placement="bottom-end"
           trigger="click"
+          @on-click="handlerClick"
         >
-          <Avatar :style="{ background: color }"><span style="cursor: pointer;">{{ userInfo.username }}</span></Avatar>
+          <Avatar :style="{ background: color }"><span style="cursor: pointer;">{{ userInfo.username.slice(0,1) }}</span></Avatar>
           <DropdownMenu slot="list">
-            <DropdownItem>我的主页</DropdownItem>
-            <DropdownItem>炸酱面</DropdownItem>
+            <DropdownItem name="myhome">我的主页</DropdownItem>
+            <!-- <DropdownItem>炸酱面</DropdownItem>
             <DropdownItem>豆汁儿</DropdownItem>
-            <DropdownItem>设置</DropdownItem>
-            <DropdownItem>退出登录</DropdownItem>
+            <DropdownItem>设置</DropdownItem> -->
+            <DropdownItem name="reset">退出登录</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </div>
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Appheader',
   data() {
@@ -73,6 +74,7 @@ export default {
     window.removeEventListener('scroll', this.autofix)
   },
   methods: {
+    ...mapActions('user', ['RESET']),
     autofix() {
       const scrollTop = document.documentElement.scrollTop
       const tag = document.querySelector('#app-main>header')
@@ -96,6 +98,14 @@ export default {
     },
     toregister() {
       this.$router.push({ path: '/login', query: { type: 'register' } })
+    },
+    // 头像下拉
+    handlerClick(name) {
+      console.log(name)
+      if (name === 'reset') {
+        this.RESET()
+        this.$router.push({ path: '/login?type=login' })
+      }
     }
   }
 }

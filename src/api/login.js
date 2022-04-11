@@ -13,3 +13,10 @@ export function register(data) {
     data,
   })
 }
+export function getUserInfo(data) {
+  return request({
+    url: '/getUserInfo',
+    method: 'GET',
+    data,
+  })
+}
