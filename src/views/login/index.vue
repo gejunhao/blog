@@ -328,7 +328,6 @@ export default {
                 this.$Message.success(res.msg)
                 const data = JSON.stringify(res.data)
                 const token = res.token
-                console.log(token)
                 localStorage.setItem('authToken', token)
                 localStorage.setItem('userInfo', data)
                 this.$store.dispatch('user/SET_AUTHTOKEN', token)
@@ -340,7 +339,18 @@ export default {
             })
           } else if (name === 'formRegister') {
             register(params).then((res) => {
-              console.log(res)
+              if (res.code === 1) {
+                this.$Message.success(res.msg)
+                const data = JSON.stringify(res.data)
+                const token = res.token
+                localStorage.setItem('authToken', token)
+                localStorage.setItem('userInfo', data)
+                this.$store.dispatch('user/SET_AUTHTOKEN', token)
+                this.$store.dispatch('user/SET_USERINFO', res.data)
+                this.$router.push('/home/index')
+              } else {
+                this.$Message.warning(res.msg)
+              }
             })
           }
         } else {
