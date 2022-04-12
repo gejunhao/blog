@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 const baseUrl = 'http://localhost:3000'
 const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new XMLHttpRequest('Microsoft.XMLHTTP')
 const _axios = (obj) => {
@@ -7,10 +8,11 @@ const _axios = (obj) => {
     if (methods === 'GET') {
       const params = formatParams(data)
       xhr.open('GET', baseUrl + url + '?' + params, true)
-
+      xhr.setRequestHeader('authToken', Cookies.get('authToken'))
       xhr.send(null)
     } else if (methods === 'POST') {
       xhr.open('POST', baseUrl + url, true)
+      xhr.setRequestHeader('authToken', Cookies.get('authToken'))
       xhr.setRequestHeader('Content-type', ContentType)
       xhr.send(data)
     }

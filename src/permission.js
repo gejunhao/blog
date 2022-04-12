@@ -19,7 +19,6 @@ router.beforeEach(async (to, form, next) => {
     if (authToken) {
       try {
         const res = await store.dispatch('user/GET_USERINFO', authToken)
-        console.log(res, '1111')
         userId = res.id
         next({ path: '/' })
       } catch (err) {
