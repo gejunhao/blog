@@ -187,6 +187,7 @@
 <script>
 import { login, register } from '@/api/login'
 
+import { encrypt } from '@/utils/crypto-js.js'
 export default {
   data() {
     const validateAge = (rule, value, callback) => {
@@ -244,7 +245,6 @@ export default {
       formRegister: {
         username: '',
         age: '',
-        account: '',
         email: '',
         password: '',
         checkpassword: '',
@@ -317,8 +317,10 @@ export default {
       this.$forceUpdate()
     },
     handleSubmit(name) {
+      const password = encrypt(this[name].password)
       const params = {
-        ...this[name]
+        ...this[name],
+        password: password
       }
       this.$refs[name].validate(async (valid) => {
         if (valid) {

@@ -1,9 +1,15 @@
 <template>
   <div class="home-body">
-    <img
+    <div
+      class="avatar-img"
+      :style="{backgroundColor:avatarColor}"
+    >
+      {{ userInfo.username }}
+    </div>
+    <!-- <img
       src="../../assets/homebanner.jpg"
       alt=""
-    >
+    > -->
     <h1>一起学前端</h1>
     <ul>
       <li>
@@ -53,10 +59,27 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'homebody',
   data() {
-    return {}
+    return {
+      bgcolor: ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae']
+    }
+  },
+  computed: {
+    ...mapGetters(['userInfo', 'avatarColor']),
+    color() {
+      const col = this.bgcolor[this.random(4)]
+      return col
+    }
+  },
+  methods: {
+    //随机背景色 range 范围 type Number
+    random(range) {
+      const index = Math.floor(Math.random() * range)
+      return index
+    }
   }
 }
 </script>
@@ -70,13 +93,17 @@ export default {
   min-height: 100vh;
   margin: 0 auto;
   color: #fff;
-  img {
+  .avatar-img {
     width: 1.5rem;
     height: 1.5rem;
     display: block;
     border-radius: 50%;
     overflow: hidden;
     margin: 1.5rem auto 0.3rem;
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 16px;
+    font-family: Tahoma, Helvetica, Arial, '宋体';
   }
   h1 {
     text-align: center;

@@ -55,8 +55,9 @@ export default {
   computed: {
     ...mapGetters(['userInfo']),
     color() {
-      const col = this.bgcolor[this.random(4)]
-      return col
+      const color = this.bgcolor[this.random(4)]
+      this.$store.dispatch('user/SET_AVATARCOLOR', color)
+      return color
     }
   },
   watch: {
@@ -91,6 +92,7 @@ export default {
     //随机背景色 range 范围 type Number
     random(range) {
       const index = Math.floor(Math.random() * range)
+
       return index
     },
     tologin() {

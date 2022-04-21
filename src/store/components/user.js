@@ -3,6 +3,7 @@ import { getUserInfo } from '../../api/login'
 const state = {
   userInfo: {},
   authToken: '',
+  avatarColor: '#f56a00',
 }
 const mutations = {
   USERINFO: (state, userInfo) => {
@@ -11,6 +12,9 @@ const mutations = {
   AUTHTOKEN: (state, authToken) => {
     state.authToken = authToken
     Cookies.set('authToken', authToken, { expires: 7 })
+  },
+  AVATARCOLOR: (state, color) => {
+    state.avatarColor = color
   },
   RESET: (state) => {
     state.userInfo = {}
@@ -44,6 +48,9 @@ const actions = {
         }
       })
     })
+  },
+  SET_AVATARCOLOR: ({ commit }, color) => {
+    commit('AVATARCOLOR', color)
   },
 }
 
