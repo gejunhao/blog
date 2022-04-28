@@ -317,13 +317,13 @@ export default {
       this.$forceUpdate()
     },
     handleSubmit(name) {
-      const password = encrypt(this[name].password)
-      const params = {
-        ...this[name],
-        password: password
-      }
       this.$refs[name].validate(async (valid) => {
         if (valid) {
+          const password = encrypt(this[name].password)
+          const params = {
+            ...this[name],
+            password: password
+          }
           if (name === 'formlogin') {
             login(params).then((res) => {
               if (res.code === 1) {
