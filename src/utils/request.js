@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie'
-const baseUrl = 'http://localhost:8111'
+const baseUrl = process.env.VUE_APP_BASE_API
+// console.log(baseUrl, '12222233333')
+// console.log(process.env.NODE_ENV)
 const xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new XMLHttpRequest('Microsoft.XMLHTTP')
 const _axios = (obj) => {
   return new Promise((resolve, reject) => {

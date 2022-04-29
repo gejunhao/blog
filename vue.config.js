@@ -7,7 +7,17 @@ function resolve(dir) {
 const name = defaultSetting.name || 'vue'
 module.exports = {
   devServer: {
-    disableHostCheck: true,
+    port: process.env.NODE_ENV === 'development' ? 8360 : 3000,
+    proxy: {
+      '/dev-api': {
+        target: 'http://ge.junhao.fun:8111',
+        pathRewrite: {
+          '^/dev-api': '',
+        },
+        changeOrigin: true,
+        logLevel: 'debug',
+      },
+    },
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
