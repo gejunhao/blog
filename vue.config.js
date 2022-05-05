@@ -7,7 +7,7 @@ function resolve(dir) {
 const name = defaultSetting.name || 'vue'
 module.exports = {
   devServer: {
-    port: process.env.NODE_ENV === 'development' ? 8360 : 3000,
+    port: process.env.NODE_ENV === 'development' ? 8080 : 3000,
     proxy: {
       '/dev-api': {
         target: 'http://ge.junhao.fun:8111',
